@@ -11,8 +11,13 @@ public abstract class BaseSchema<T> {
     protected static final String CONTAINS = "contains";
     protected static final String POSITIVE = "positive";
     protected static final String RANGE = "range";
+    protected static final String SIZE_OF = "sizeof";
 
     protected Map<String, Predicate<T>> checks = new LinkedHashMap<>();
+
+    public BaseSchema required() {
+        return this;
+    }
 
     protected final void addCheck(String name, Predicate<T> check) {
         checks.put(name, check);
