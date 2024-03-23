@@ -5,6 +5,7 @@ public class NumberSchema extends BaseSchema {
         super();
     }
 
+    @Override
     public NumberSchema required() {
         addCheck(REQUIRED, object -> object instanceof Integer);
         return this;
@@ -16,7 +17,12 @@ public class NumberSchema extends BaseSchema {
     }
 
     public NumberSchema range(Integer num1, Integer num2) {
-        addCheck(RANGE, value -> ((Integer) value) >= num1 && ((Integer) value) <= num2);
+        if (num2 > num1) {
+            addCheck(RANGE, value -> ((Integer) value) >= num1 && ((Integer) value) <= num2);
+        } else {
+            throw new IllegalArgumentException(
+                    "Invalid argument values, the first argument cannot be larger than the second.");
+        }
         return this;
     }
 }
