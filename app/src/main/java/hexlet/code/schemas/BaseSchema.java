@@ -4,19 +4,21 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-public abstract class BaseSchema {
+public abstract class BaseSchema<T> {
 
     protected static final String REQUIRED = "required";
     protected static final String MIN_LENGTH = "minLength";
     protected static final String CONTAINS = "contains";
+    protected static final String POSITIVE = "positive";
+    protected static final String RANGE = "range";
 
-    protected Map<String, Predicate<Object>> checks = new LinkedHashMap<>();
+    protected Map<String, Predicate<T>> checks = new LinkedHashMap<>();
 
-    protected final void addCheck(String name, Predicate<Object> check) {
+    protected final void addCheck(String name, Predicate<T> check) {
         checks.put(name, check);
     }
 
-    public final boolean isValid(Object object) {
+    public final boolean isValid(T object) {
         return checks.values().stream().allMatch(check -> check.test(object));
     }
 
