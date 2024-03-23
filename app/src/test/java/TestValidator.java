@@ -38,4 +38,32 @@ public class TestValidator {
         assertTrue(schema.isValid(content1));
         assertFalse(schema.isValid(content2));
     }
+
+    @Test
+    public void testNumberSchema() {
+
+        var v = new Validator();
+        var schema = v.number();
+
+
+        assertTrue(schema.isValid(5));
+        assertTrue(schema.isValid(null));
+
+
+        assertTrue(schema.positive().isValid(null));
+
+        schema.required();
+
+        assertTrue(schema.isValid(10));
+        assertFalse(schema.isValid(null));
+        assertFalse(schema.isValid(-10));
+        assertFalse(schema.isValid(0));
+
+        schema.range(5, 10);
+
+        assertTrue(schema.isValid(5));
+        assertTrue(schema.isValid(10));
+        assertFalse(schema.isValid(4));
+        assertFalse(schema.isValid(11));
+    }
 }
