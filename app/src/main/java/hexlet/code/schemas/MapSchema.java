@@ -2,7 +2,7 @@ package hexlet.code.schemas;
 
 import java.util.Map;
 
-public final class MapSchema extends BaseSchema {
+public final class MapSchema<R, T> extends BaseSchema<T> {
 
     public MapSchema() {
         super();
@@ -32,8 +32,8 @@ public final class MapSchema extends BaseSchema {
                 map -> mapSchema.entrySet()
                         .stream()
                         .allMatch(e ->
-                e.getValue().isValid((((Map) map).get(e.getKey()))))
-        );
+                e.getValue().isValid((T) ((Map) map).get(e.getKey()))
+        ));
 
         return this;
     }
