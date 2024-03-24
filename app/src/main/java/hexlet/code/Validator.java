@@ -4,17 +4,17 @@ import hexlet.code.schemas.MapSchema;
 import hexlet.code.schemas.NumberSchema;
 import hexlet.code.schemas.StringSchema;
 
-public class Validator {
+public final class Validator<R, T> {
 
-    public StringSchema string() {
-        return new StringSchema();
+    public StringSchema<?> string() {
+        return new StringSchema<String>();
     }
 
-    public NumberSchema number() {
-        return new NumberSchema();
+    public NumberSchema<?> number() {
+        return new NumberSchema<Number>();
     }
 
-    public MapSchema map() {
-        return new MapSchema();
+    public MapSchema<R, T> map() {
+        return new MapSchema<R, T>();
     }
 }

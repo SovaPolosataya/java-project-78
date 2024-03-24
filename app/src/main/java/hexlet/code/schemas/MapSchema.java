@@ -2,7 +2,7 @@ package hexlet.code.schemas;
 
 import java.util.Map;
 
-public class MapSchema<R, T> extends BaseSchema<T> {
+public final class MapSchema<R, T> extends BaseSchema<T> {
 
     public MapSchema() {
         super();

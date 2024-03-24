@@ -1,6 +1,6 @@
 package hexlet.code.schemas;
 
-public class NumberSchema<T> extends BaseSchema<T> {
+public final class NumberSchema<T> extends BaseSchema<T> {
 
     public NumberSchema() {
         super();
