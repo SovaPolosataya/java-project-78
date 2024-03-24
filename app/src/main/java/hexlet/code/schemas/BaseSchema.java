@@ -12,10 +12,11 @@ public abstract class BaseSchema<T> {
     protected static final String POSITIVE = "positive";
     protected static final String RANGE = "range";
     protected static final String SIZE_OF = "sizeof";
+    protected static final String SHAPE = "shape";
 
     protected Map<String, Predicate<T>> checks = new LinkedHashMap<>();
 
-    public BaseSchema required() {
+    public BaseSchema<T> required() {
         return this;
     }
 
@@ -24,7 +25,9 @@ public abstract class BaseSchema<T> {
     }
 
     public final boolean isValid(T object) {
-        return checks.values().stream().allMatch(check -> check.test(object));
-    }
 
+        return checks.values()
+                .stream()
+                .allMatch(check -> check.test(object));
+    }
 }
