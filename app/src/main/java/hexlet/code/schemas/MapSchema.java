@@ -2,21 +2,21 @@ package hexlet.code.schemas;
 
 import java.util.Map;
 
-public final class MapSchema<R, T> extends BaseSchema<T> {
+public final class MapSchema extends BaseSchema {
 
     public MapSchema() {
         super();
     }
 
     @Override
-    public MapSchema<R, T> required() {
+    public MapSchema required() {
         addCheck(REQUIRED,
                 object -> object instanceof Map);
 
         return this;
     }
 
-    public MapSchema<R, T> sizeof(Integer size) {
+    public MapSchema sizeof(Integer size) {
         if (size >= 0) {
             addCheck(SIZE_OF,
                     map -> ((Map) map).size() == size);
@@ -27,12 +27,12 @@ public final class MapSchema<R, T> extends BaseSchema<T> {
         return this;
     }
 
-    public  MapSchema<R, T> shape(Map<String, BaseSchema<T>> mapSchema) {
+    public  MapSchema shape(Map<String, BaseSchema> mapSchema) {
         addCheck(SHAPE,
                 map -> mapSchema.entrySet()
                         .stream()
                         .allMatch(e ->
-                e.getValue().isValid((T) ((Map) map).get(e.getKey())))
+                e.getValue().isValid((((Map) map).get(e.getKey()))))
         );
 
         return this;

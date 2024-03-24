@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-public abstract class BaseSchema<T> {
+public abstract class BaseSchema {
 
     protected static final String REQUIRED = "required";
     protected static final String MIN_LENGTH = "minLength";
@@ -14,17 +14,21 @@ public abstract class BaseSchema<T> {
     protected static final String SIZE_OF = "sizeof";
     protected static final String SHAPE = "shape";
 
-    protected Map<String, Predicate<T>> checks = new LinkedHashMap<>();
+    protected Map<String, Predicate<Object>> checks;
 
-    public BaseSchema<T> required() {
+    public BaseSchema() {
+        checks = new LinkedHashMap<>();
+    }
+
+    public BaseSchema required() {
         return this;
     }
 
-    protected final void addCheck(String name, Predicate<T> check) {
+    protected final void addCheck(String name, Predicate<Object> check) {
         checks.put(name, check);
     }
 
-    public final boolean isValid(T object) {
+    public final boolean isValid(Object object) {
 
         return checks.values()
                 .stream()

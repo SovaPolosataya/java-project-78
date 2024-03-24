@@ -1,27 +1,27 @@
 package hexlet.code.schemas;
 
-public final class NumberSchema<T> extends BaseSchema<T> {
+public final class NumberSchema extends BaseSchema {
 
     public NumberSchema() {
         super();
     }
 
     @Override
-    public NumberSchema<T> required() {
+    public NumberSchema required() {
         addCheck(REQUIRED,
                 object -> object instanceof Integer);
 
         return this;
     }
 
-    public NumberSchema<T> positive() {
+    public NumberSchema positive() {
         addCheck(POSITIVE,
                 value -> value == null || ((Integer) value) > 0);
 
         return this;
     }
 
-    public NumberSchema<T> range(Integer num1, Integer num2) {
+    public NumberSchema range(Integer num1, Integer num2) {
         if (num2 > num1) {
             addCheck(RANGE,
                     value -> ((Integer) value) >= num1 && ((Integer) value) <= num2);
