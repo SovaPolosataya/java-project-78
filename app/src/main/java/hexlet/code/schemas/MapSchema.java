@@ -8,7 +8,6 @@ public final class MapSchema<R, T> extends BaseSchema<T> {
         super();
     }
 
-    @Override
     public MapSchema required() {
         addCheck(REQUIRED,
                 object -> object instanceof Map);

@@ -16,9 +16,9 @@ public abstract class BaseSchema<T> {
 
     protected Map<String, Predicate<Object>> checks = new LinkedHashMap<>();
 
-    public BaseSchema<T> required() {
-        return this;
-    }
+//    public BaseSchema<T> required() {
+//        return this;
+//    }
 
     protected final void addCheck(String name, Predicate<Object> check) {
         checks.put(name, check);

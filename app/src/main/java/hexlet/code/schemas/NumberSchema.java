@@ -6,7 +6,6 @@ public final class NumberSchema extends BaseSchema {
         super();
     }
 
-    @Override
     public NumberSchema required() {
         addCheck(REQUIRED,
                 object -> object instanceof Integer);

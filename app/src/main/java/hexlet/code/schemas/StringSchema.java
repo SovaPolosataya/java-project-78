@@ -6,7 +6,6 @@ public final class StringSchema extends BaseSchema {
         super();
     }
 
-    @Override
     public StringSchema required() {
         addCheck(REQUIRED,
                 object -> object instanceof String string && !string.isEmpty());
