@@ -1,14 +1,19 @@
 package hexlet.code.schemas;
 
-public final class StringSchema extends BaseSchema {
+
+public final class StringSchema extends BaseSchema<String> {
+
+    static final String MIN_LENGTH = "minLength";
+    static final String CONTAINS = "contains";
 
     public StringSchema() {
         super();
     }
 
+    @Override
     public StringSchema required() {
         addCheck(REQUIRED,
-                object -> object instanceof String string && !string.isEmpty());
+                o -> (o != null && !o.isEmpty()));
 
         return this;
     }
@@ -16,7 +21,7 @@ public final class StringSchema extends BaseSchema {
     public StringSchema minLength(Integer length) {
         if (length >= 0) {
             addCheck(MIN_LENGTH,
-                    value -> ((String) value).length() >= length);
+                    value -> value.length() >= length);
         } else {
             throw new IllegalArgumentException("The argument cannot be less than 0");
         }
@@ -26,7 +31,7 @@ public final class StringSchema extends BaseSchema {
 
     public StringSchema contains(String substring) {
         addCheck(CONTAINS,
-                value -> ((String) value).contains(substring));
+                value -> value.contains(substring));
 
         return this;
     }

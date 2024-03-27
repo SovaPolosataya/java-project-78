@@ -1,24 +1,29 @@
 package hexlet.code.schemas;
 
 import java.util.Map;
+import java.util.Objects;
 
-public final class MapSchema<R, T> extends BaseSchema<T> {
+public final class MapSchema<T> extends BaseSchema<Map<?, ?>> {
+
+    static final String SIZE_OF = "sizeof";
+    static final String SHAPE = "shape";
 
     public MapSchema() {
         super();
     }
 
-    public MapSchema required() {
+    @Override
+    public MapSchema<T> required() {
         addCheck(REQUIRED,
-                object -> object instanceof Map);
+                Objects::nonNull);
 
         return this;
     }
 
-    public MapSchema sizeof(Integer size) {
+    public MapSchema<T> sizeof(Integer size) {
         if (size >= 0) {
             addCheck(SIZE_OF,
-                    map -> ((Map) map).size() == size);
+                    map -> map.size() == size);
         } else {
             throw new IllegalArgumentException("The argument cannot be less than 0");
         }
@@ -26,12 +31,12 @@ public final class MapSchema<R, T> extends BaseSchema<T> {
         return this;
     }
 
-    public  MapSchema shape(Map<String, BaseSchema> mapSchema) {
+    public  MapSchema<T> shape(Map<String, BaseSchema<T>> mapSchema) {
         addCheck(SHAPE,
                 map -> mapSchema.entrySet()
                         .stream()
                         .allMatch(e ->
-                e.getValue().isValid((T) ((Map) map).get(e.getKey()))
+                e.getValue().isValid((T) (map.get(e.getKey())))
         ));
 
         return this;
