@@ -1,20 +1,11 @@
 plugins {
-    id 'application'
+    id 'java'
     id 'checkstyle'
     id 'jacoco'
 }
 
 group = 'hexlet.code'
 version = '1.0-SNAPSHOT'
-
-application {
-    mainClass = 'hexlet.code.App'
-}
-
-compileJava {
-    options.release = 20
-    options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
-}
 
 repositories {
     mavenCentral()
