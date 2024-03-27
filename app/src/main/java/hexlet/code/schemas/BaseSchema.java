@@ -10,10 +10,8 @@ public abstract class BaseSchema<T> {
 
     protected Map<String, Predicate<T>> checks = new LinkedHashMap<>();
 
-    protected BaseSchema<T> required() {
+    protected abstract BaseSchema<T> required();
 
-        return this;
-    }
 
     protected final void addCheck(String name, Predicate<T> check) {
         checks.put(name, check);
